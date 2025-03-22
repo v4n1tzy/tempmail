@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Temporaire</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            color: white;
+            height: 100vh;
+            justify-content: center;
+            background-color: #1e3c72; /* Couleur de fond de base */
+            background-image: url('https://www.transparenttextures.com/patterns/noise-2.png'); /* Texture de bruit */
+        }
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .email-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .email-input {
+            width: 250px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            color: black;
+        }
+        .copy-button, .generate-button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .generate-button {
+            background: #28a745;
+            margin-top: 10px;
+        }
+        .inbox-container {
+            margin-top: 20px;
+            width: 300px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .empty-inbox {
+            color: #ddd;
+        }
+        .email-list {
+            list-style: none;
+            padding: 0;
+        }
+        .email-item {
+            border-bottom: 1px solid #ddd;
+            padding: 8px 0;
+        }
+        .email-subject {
+            font-weight: bold;
+        }
+        .email-sender {
+            color: #ccc;
+            font-size: 12px;
+        }
+        .email-content {
+            margin-top: 5px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Email Temporaire</h1>
+    <div class="email-container">
+        <input id="email" class="email-input" readonly value="example@temp.com">
+        <button onclick="copyToClipboard()" class="copy-button">Copier</button>
+    </div>
+    <button onclick="generateNewEmail()" class="generate-button">Générer un nouvel email</button>
+    <div class="inbox-container">
+        <h2>Boîte de réception</h2>
+        <p id="empty-inbox" class="empty-inbox">Aucun message reçu.</p>
+        <ul id="email-list" class="email-list"></ul>
+    </div>
+    <script>
+        function generateNewEmail() {
+            const randomString = Math.random().toString(36).substring(2, 10);
+            document.getElementById("email").value = `${randomString}@temp.com`;
+            document.getElementById("email-list").innerHTML = "";
+            document.getElementById("empty-inbox").style.display = "block";
+        }
+        
+        function copyToClipboard() {
+            const emailInput = document.getElementById("email");
+            emailInput.select();
+            document.execCommand("copy");
+            alert("Email copié !");
+        }
+    </script>
+</body>
+</html>
